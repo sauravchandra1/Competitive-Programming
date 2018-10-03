@@ -1,3 +1,4 @@
+#Project Euler
 a = ""
 b = ""
 mul = 0
