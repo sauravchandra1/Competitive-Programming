@@ -4,7 +4,7 @@ const int N = 55;
 int l, n, arr[N];
 int dp[N][N];
 int main() {
-	while (1) {
+	while (true) {
 		scanf("%d", &l);
 		if (l == 0)
 			break;
