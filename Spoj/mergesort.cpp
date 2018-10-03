@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int siz=2e5+5;
+const int siz = 2e5+5;
 
 void merge(int arr[],int start,int mid,int end){
 	int n1=mid-start+1;
