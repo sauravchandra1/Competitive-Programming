@@ -11,7 +11,7 @@ const int siz = 1e5 + 5;
 
 #define eb emplace_back
 #define mp make_pair
-#define OPEN 0
+#define OPEN false
 
 int main() {
 	if (OPEN) {
