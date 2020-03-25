@@ -1,43 +1,42 @@
-
 class SegmentTree {
-	vector < int > tree;
+	vector<int> tree;
 public:
-	SegmentTree(int n): tree(n, 0) {}
-	void build(vector < int > arr, int l, int r, int id) {
-		if (l > r)
+	SegmentTree(int n) : tree(4 * n, 0) {}
+	void build (vector<int> arr, int l, int r, int pos) {
+		if (l > r) {
 			return;
-		if (l == r)
-			tree[id] = arr[l];
+		}
+		if (l == r) {
+			tree[pos] = arr[l];
+		}
 		else {
 			int mid = l + (r - l) / 2;
-			build(arr, l, mid, id * 2 + 1);
-			build(arr, mid + 1, r, id * 2 + 2);
-			tree[id] = max(tree[id * 2 + 1], tree[id * 2 + 2]);
+			build(arr, l, mid, 2 * pos + 1);
+			build(arr, mid + 1, r, 2 * pos + 2);
+			tree[pos] = max(tree[2 * pos + 1], tree[2 * pos + 2]);
 		}
 	}
-	void pointUpdate(int newVal, int p, int l, int r, int id) {
-		if (p < l || p > r)
+	void update (int newVal, int L, int R, int l, int r, int pos) {
+		if (L < l || R > r)
 			return;
 		if (l == r) {
-			tree[id] = newVal;
+			tree[pos] = newVal;
 			return;
 		}
 		int mid = l + (r - l) / 2;
-		if (p <= mid)
-			pointUpdate(newVal, p, l, mid, id * 2 + 1);
-		else 
-			pointUpdate(newVal, p, mid + 1, r, id * 2 + 2);
-		tree[id] = max(tree[id * 2 + 1], tree[id * 2 + 2]);
+		update(newVal, L, R, l, mid, 2 * pos + 1);
+		update(newVal, L, R, mid + 1, r, 2 * pos + 2);
+		tree[pos] = max(tree[2 * pos + 1], tree[2 * pos + 2]);
 	}
-	int query(int L, int R, int l, int r, int id) {
+	int query (int L, int R, int l, int r, int pos) {
 		if (l > R || r < L)
 			return INT_MIN;
 		else if (l >= L && r <= R)
-			return tree[id];
+			return tree[pos];
 		else {
 			int mid = l + (r - l) / 2;
-			int leftAns = query(L, R, l, mid, id * 2 + 1);
-			int rightAns = query(L, R, mid + 1, r, id * 2 + 2);
+			int leftAns = query(L, R, l, mid, 2 * pos + 1);
+			int rightAns = query(L, R, mid + 1, r, 2 * pos + 2);
 			int ans = max(leftAns, rightAns);
 			return ans;
 		}

@@ -1,4 +1,4 @@
-ll pwr(ll x, ll y, ll mod) {
+ll pwr(ll x, ll y) {
   ll res = 1; 
   x = x % mod;   
   while (y > 0) {
@@ -10,6 +10,6 @@ ll pwr(ll x, ll y, ll mod) {
   return res;
 }
 
-ll modInverse(ll a, ll m) {
-	return pwr(a, m - 2, m);
+ll modInverse(ll a) {
+  return pwr(a, mod - 2);
 }
